@@ -28,7 +28,7 @@ Claude/Specifications/_spNN-name/specs-md/    <- SUBPROJECT-scoped layer:
 
 Job-wide manual sections -> the flat layer; subproject-issued specs -> that subproject's `specs-md/`. Unsure which layer? Ask. Create missing output folders before writing.
 
-**Existing state (don't clobber):** the job-wide layer holds 63 sections from the consolidated Project Manual; `_sp01`/`_sp02` have populated SPEC_INDEXes. Always read the existing index and edit in place.
+**Existing state (don't clobber):** before writing, read any existing SPEC_INDEX(es) and the current output layers, then edit in place — never regenerate over a populated index.
 
 ---
 
@@ -63,9 +63,9 @@ Full extraction workflow, QC heuristics, and both paths in `references/pdf_extra
 
 ### Step 0 — Orient in the project OS
 
-1. Read `Claude/CLAUDE.md` -> `_Memory/AGENTS.md` if not already loaded this session. AGENTS.md §3 carries the binding 11/20/2025 Opterra clarifications table — it OVERRIDES spec text; review cards must reflect it (e.g., 09 90 00 governs painting; 1/8" EPDM gaskets project-wide).
+1. Read `Claude/CLAUDE.md` -> `_Memory/AGENTS.md` if not already loaded this session. AGENTS.md §3 carries this job's binding owner/engineer clarifications — they OVERRIDE spec text, and review cards must reflect them.
 2. Locate the source in `Claude/Map/machine/manifest.json`; note its record id, type confidence, and subproject. Unmapped source -> add a record first (cartographer rules; propose if off-convention, D8).
-3. Job context (three-firm risk, locked decisions, subproject status) comes from `_Memory/` wiki pages — query via gse-wiki if needed. The old ClaudeOS MEMORY.md hierarchy is RETIRED (AGENTS.md §9) — do not look for MEMORY.md files.
+3. Job context (design-firm split, locked decisions, subproject status) comes from `_Memory/` wiki pages — query via gse-wiki if needed. The old ClaudeOS MEMORY.md hierarchy is RETIRED (AGENTS.md §9) — do not look for MEMORY.md files.
 4. `references/memory_workflow.md` in this fork is rewritten as the project-OS orientation reference — read it for the correction-routing rules.
 
 **Resume check (all tiers):**

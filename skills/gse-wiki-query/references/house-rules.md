@@ -26,18 +26,18 @@ Ingest consumes from wherever **the map** points — not just `_raw/` and skill 
 ## Link mesh (D9 — three enforced layers)
 
 1. **Backlinks:** every synthesis file created ANYWHERE by any skill carries `**Wiki:** [[hub-page]]` at creation.
-2. **Hub pages:** every processed set/package gets or updates a wiki hub (`headworks-bypass-drawings` is the model): what it is, where the synthesis lives, headline findings, open items.
-3. **Topic weaving:** ingest also touches the relevant TOPIC pages — a gasket decision lands links on `bolts-nuts-gaskets`, not just the hub.
+2. **Hub pages:** every processed set/package gets or updates a wiki hub: what it is, where the synthesis lives, headline findings, open items.
+3. **Topic weaving:** ingest also touches the relevant TOPIC pages — a material decision lands links on the relevant material topic page, not just the hub.
 
 Density target ~40%, but **dense AND relevant** — indiscriminate linking destroys routing value; relevance is the gate. **Ghost nodes are a supported house feature** (unlike upstream): ~21 intentional page-less nodes (people, shared entities) connect clusters by design. Prefer linking existing pages; use ghost nodes deliberately for shared entities; formal policy lands in ultraplan P5.3.
 
 ## Seed overlay (3.3 — keeps seed and job knowledge separable)
 
-When an ingested project fact (locked decision, RFI resolution, binding clarification) also belongs on a **seed/topic page** (pipe-materials, valves, bolts-nuts-gaskets, waterstop, division-3-concrete, …), add it under an overlay heading on that page:
+When an ingested project fact (locked decision, RFI resolution, binding clarification) also belongs on a **seed/topic page** (a material, system, or division topic page), add it under an overlay heading on that page:
 
 ```markdown
 ## Project decisions
-- 1/8" EPDM flange gaskets project-wide (Opterra Clarifications 11/20/2025) — see [[hub-or-decision-page]]
+- <locked decision, stated concisely> (<source + date>) — see [[hub-or-decision-page]]
 ```
 
 Never blend job facts into seed prose outside the overlay heading — harvest (P6.4) must be able to separate company knowledge from job facts at closeout.
@@ -56,6 +56,6 @@ After every ingest/promote that consumes a mapped source: mark the manifest reco
 ## Job-specific cautions
 
 - **PII discipline (D7):** synthesis from payroll/payment/timecard sources summarizes — individual wage/PII detail stays out of wiki prose.
-- **Three-firm rule:** any drawing-derived claim cites whose drawing (original EOR / PK / MKM / G3). PK=concrete/structural layout, MKM=equipment supports/handrails/screw conveyor slab; overlaps get flagged, not resolved.
-- **Binding clarifications:** the 11/20/2025 Opterra table in AGENTS.md §3 overrides spec text — don't re-flag those as discrepancies or contradictions.
+- **Design-firm rule:** any drawing-derived claim cites whose drawing it comes from (the responsible design firm). This job's firm roster and scope split live in AGENTS.md §9; overlaps get flagged, not resolved.
+- **Binding clarifications:** the owner/engineer clarifications table in AGENTS.md §3 overrides spec text — don't re-flag those as discrepancies or contradictions.
 - **Never delete** — retire to `Claude/_archive/` (standing rule).

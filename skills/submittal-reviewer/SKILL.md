@@ -54,11 +54,10 @@ degrade gracefully when a source is absent (say so in the output rather than gue
    - **Drawings** — find the subproject's drawing data under `Claude/Drawings/<subproject>/`.
      If it's in current drawing-engine form (`drawing-db/<set>/machine`), use drawing-engine
      QUERY mode. If it's an older `drawings-md` form, read the sheet cards / text directly.
-   - **Wiki** — query `Claude/_Memory/` via the **gse-wiki** skill (`Claude/skills/gse-wiki/`;
-     plugin `gsewiki:query` acceptable until the fork is validated). Check `_Memory/AGENTS.md`
-     §3 FIRST — the binding 11/20/2025 Opterra clarifications override spec text and must
-     never be re-flagged as discrepancies (gaskets, coatings, SS grade, hydro testing,
-     waterstop, wall forms, valve testing…).
+   - **Wiki** — query `Claude/_Memory/` via the **gse-wiki-query** skill (plugin
+     `gsewiki:query` acceptable until the fork is validated). Check `_Memory/AGENTS.md`
+     §3 FIRST — this job's binding owner/engineer clarifications override spec text and
+     must never be re-flagged as discrepancies.
    - **Memory** — RETIRED (AGENTS.md §9): do NOT look for MEMORY.md files. `_Memory/` (via
      the wiki query above) is the single memory system; `Claude/CLAUDE.md` is the boot file.
    - **Prior reviews / RFIs / COs** — `Claude/Submittals/<subproject>/reviews/`,

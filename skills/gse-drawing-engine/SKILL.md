@@ -110,7 +110,7 @@ python scripts/init_namespace.py --set-dir "<…/drawing-db/<set-name>>" --date 
 
 This is idempotent and safe: it never overwrites an existing `manifest.json` or
 `coverage_status.json`. `<set-name>` should match how the set is named in
-Procore/Bluebeam (e.g. `headworks-bypass-IFC`, `headworks-bypass-addendum-2`).
+Procore/Bluebeam (e.g. `<set>-IFC`, `<set>-addendum-2`).
 
 ### Single source of truth (D5)
 `machine/*.json` is the source of truth, schema-validated. `views/*.md` are
@@ -141,22 +141,21 @@ The ClaudeOS MEMORY.md hierarchy is RETIRED (AGENTS.md §9) — do not look for
 MEMORY.md files. Instead, before running:
 
 1. Read `Claude/CLAUDE.md` → `_Memory/AGENTS.md` if not loaded this session.
-   Scope context (three-firm risk, subproject status, locked decisions) comes from
+   Scope context (design-firm split, subproject status, locked decisions) comes from
    `_Memory/` wiki pages via gse-wiki query.
 2. Locate the source PDF's record in `Claude/Map/machine/manifest.json`; confirm
    the target subproject and `<set-name>` when ambiguous.
 3. **Current-set check:** consult `Claude/Map/views/SUPERSEDED.md` + the subproject
    context before building on or answering from any set — never assume newest-modified
    is current (AGENTS.md §9).
-4. **Three-firm rule:** classification and RFI-candidate outputs cite whose drawing
-   (original EOR / PK / MKM / G3). PK=concrete/structural layout, MKM=equipment
-   supports/handrails/screw conveyor slab; overlaps get flagged, never resolved.
+4. **Design-firm rule:** classification and RFI-candidate outputs cite whose drawing
+   a claim comes from (the responsible design firm). This job's firm roster and each
+   firm's scope live in AGENTS.md §9; overlaps get flagged, never resolved.
 
 ## Backlinks + map-update contract (MANDATORY at end of BUILD/UPDATE)
 
 1. **Backlinks (D9):** `views/drawings.md` and set-level views carry
-   `**Wiki:** [[hub-page]]`; new sets get/update a wiki hub via gse-wiki ingest
-   (`headworks-bypass-drawings` is the model).
+   `**Wiki:** [[hub-page]]`; new sets get/update a wiki hub via gse-wiki ingest.
 2. **Map-update contract** (`Claude/Map/machine/MAP_UPDATE_CONTRACT.md`): mark the
    source PDF's manifest record `processed` + `processed_home` → the new set dir.
    **Supersession discipline feeds the map:** when a new rev supersedes a set, keep

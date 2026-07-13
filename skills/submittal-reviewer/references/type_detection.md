@@ -44,9 +44,9 @@ drawings, weight, seismic/vibration anchorage calcs, O&M manuals, spare-parts li
 factory test reports. CSI Div 40/43/46, or an equipment schedule reference.
 **Authority:** spec + **scheduled duty point on the drawings** (flow/head/HP) + wiki/PO history
 for what was actually bought.
-**Note:** on this project some equipment is Owner/Opterra-preselected (see 46 00 00 §1.01.B) —
-if memory/spec says the Owner owns the selection, review for completeness/coordination, not for
-product approval.
+**Note:** on some projects certain equipment is Owner-preselected (check the spec's Div 46 /
+procurement sections and AGENTS.md) — if memory/spec says the Owner owns the selection, review
+for completeness/coordination, not for product approval.
 
 ## Fallback (everything else)
 Samples, mock-ups, color/finish selections, welding procedures (WPS/PQR), coordination drawings,

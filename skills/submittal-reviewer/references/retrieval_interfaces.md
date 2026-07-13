@@ -4,8 +4,8 @@ Read at **Step 0**. Everything is discovery-based: locate what exists for *this*
 then drive it. When a source is absent, say so in the output and continue — a missing source is
 a caveat, never a guess.
 
-Convention below: `<sub>` = the subproject namespace folder, e.g. `_sp01-headworks`,
-`_sp02-headworks-bypass`, `_sp03-richmond-sludge`.
+Convention below: `<sub>` = the subproject namespace folder, following the `_spNN-<name>`
+pattern (e.g. `_sp01-<name>`, `_sp02-<name>`).
 
 ---
 
@@ -91,13 +91,13 @@ If no wiki is configured or reachable in this session, **skip it** and record
 
 Sources, in authority order:
 ```
-Claude/_Memory/AGENTS.md §3         (binding Opterra clarifications — override spec text)
-Claude/_Memory/AGENTS.md §9         (project rulings: naming, revision rule, three-firm rule)
+Claude/_Memory/AGENTS.md §3         (binding owner/engineer clarifications — override spec text)
+Claude/_Memory/AGENTS.md §9         (project rulings: naming, revision rule, design-firm rule)
 Claude/_Memory/wiki/ topic pages    (via gse-wiki query: gaskets, waterstop, valves, coatings…)
 Claude/CLAUDE.md                    (boot rules)
 ```
-Rulings can **suppress** a flag (e.g. "GSE self-performs waterstop welding — don't flag";
-"1/8\" EPDM gaskets project-wide — don't flag Buna-N deviation") or **add** a rule. Apply in
+Rulings can **suppress** a flag (e.g. "GSE self-performs this scope — don't flag it"; "the
+Owner owns this equipment selection — don't flag a product substitution") or **add** a rule. Apply in
 Phase 1 and cite the ruling's source (AGENTS.md §3 row / wiki page) in the "Rulings applied"
 output section. `meta/contradictions.md` and `meta/open-questions.md` tell you what is
 genuinely unsettled — don't present a known open question as a new finding.
