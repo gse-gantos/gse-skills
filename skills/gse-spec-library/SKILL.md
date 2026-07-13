@@ -1,9 +1,9 @@
 ---
 name: gse-spec-library
-description: Job-824 fork of spec-library (ultraplan 4.1) — input is whatever spec-type files the Project File Map queues, from ANYWHERE in the project folder; outputs per the D1 placement rule. Convert construction specification PDFs (combined project manuals, individual CSI sections, or addenda) into a normalized set of per-section markdown files plus a master index, so submittals can later be reviewed cheaply without re-reading source PDFs. Use this whenever the user points to spec PDFs, a project manual, or an addendum and wants them processed, indexed, or prepped for submittal review. Also trigger when the user says "add this to my library", "file this spec", "process this spec", "file this", "log this spec", "add to spec library", "save to library", or similar phrasing indicating they want a spec saved for future reference. Also trigger on "specs-md", "SPEC_INDEX", processing a project manual, or extracting discrepancy checklists from specs — even if they don't say the word "skill". This is step 1 of a two-skill submittal-review system; it produces the retrieval layer the submittal-reviewer skill consumes.
+description: GSE fork of spec-library (ultraplan 4.1) — input is whatever spec-type files the Project File Map queues, from ANYWHERE in the project folder; outputs per the D1 placement rule. Convert construction specification PDFs (combined project manuals, individual CSI sections, or addenda) into a normalized set of per-section markdown files plus a master index, so submittals can later be reviewed cheaply without re-reading source PDFs. Use this whenever the user points to spec PDFs, a project manual, or an addendum and wants them processed, indexed, or prepped for submittal review. Also trigger when the user says "add this to my library", "file this spec", "process this spec", "file this", "log this spec", "add to spec library", "save to library", or similar phrasing indicating they want a spec saved for future reference. Also trigger on "specs-md", "SPEC_INDEX", processing a project manual, or extracting discrepancy checklists from specs — even if they don't say the word "skill". This is step 1 of a two-skill submittal-review system; it produces the retrieval layer the submittal-reviewer skill consumes.
 ---
 
-# GSE Spec Library (824 fork)
+# GSE Spec Library
 
 > **Fork provenance:** forked 2026-07-10 from installed `spec-library` per ultraplan 4.1. Changes: map-driven input, D1 output placement, `_Memory/` orientation replacing the retired MEMORY.md loader, backlink emission, map-update contract. Extraction, batching, templates, and QC are inherited unchanged.
 
@@ -11,9 +11,9 @@ Convert spec PDFs into a layered retrieval system. Read each section once, produ
 
 ---
 
-## Project 824 OS — inputs and outputs
+## Project OS — inputs and outputs
 
-*(Replaces upstream's three-tier workspace detection — this fork runs in exactly one environment: the Job 824 `Claude/` OS. See `_Memory/AGENTS.md`.)*
+*(Replaces upstream's three-tier workspace detection — this fork runs in exactly one environment: the project's `Claude/` OS. See `_Memory/AGENTS.md`.)*
 
 **Input — wherever the map points (D5).** Source spec PDFs may sit anywhere in the project folder (`Specs & Drawings/Specs/`, a submittal package, a Change Events folder). Find them via `Claude/Map/` (`views/FILE_MAP.md` / `UNPROCESSED.md`) — never assume a fixed input folder, never move or rename the raw PDF. Record the source path exactly as found (provenance).
 
@@ -61,12 +61,12 @@ Full extraction workflow, QC heuristics, and both paths in `references/pdf_extra
 
 ## Workflow
 
-### Step 0 — Orient in the 824 OS
+### Step 0 — Orient in the project OS
 
 1. Read `Claude/CLAUDE.md` -> `_Memory/AGENTS.md` if not already loaded this session. AGENTS.md §3 carries the binding 11/20/2025 Opterra clarifications table — it OVERRIDES spec text; review cards must reflect it (e.g., 09 90 00 governs painting; 1/8" EPDM gaskets project-wide).
 2. Locate the source in `Claude/Map/machine/manifest.json`; note its record id, type confidence, and subproject. Unmapped source -> add a record first (cartographer rules; propose if off-convention, D8).
 3. Job context (three-firm risk, locked decisions, subproject status) comes from `_Memory/` wiki pages — query via gse-wiki if needed. The old ClaudeOS MEMORY.md hierarchy is RETIRED (AGENTS.md §9) — do not look for MEMORY.md files.
-4. `references/memory_workflow.md` in this fork is rewritten as the 824 orientation reference — read it for the correction-routing rules.
+4. `references/memory_workflow.md` in this fork is rewritten as the project-OS orientation reference — read it for the correction-routing rules.
 
 **Resume check (all tiers):**
 
@@ -180,7 +180,7 @@ Hand the review card to someone who's never seen the spec. They should be able t
 
 Read the relevant reference before each step — don't rely on memory of the template.
 
-- `references/memory_workflow.md` — **rewritten for 824:** OS orientation, correction routing via gse-wiki, retired-MEMORY.md notice. Read at Step 0.
+- `references/memory_workflow.md` — **rewritten for this OS:** orientation, correction routing via gse-wiki, retired-MEMORY.md notice. Read at Step 0.
 - `references/pdf_extraction.md` — Path A (Bluebeam) and Path B (pdftotext) extraction: scan detection, QC heuristics, visual inspection, page tracking, fidelity notes. Read before touching any PDF.
 - `references/review_card_format.md` — review card template and field guidance. Read before Step 4.
 - `references/section_template.md` — full section `.md` template. Read before Step 3.

@@ -30,6 +30,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--root", required=True)
     args = ap.parse_args()
+    job = os.path.basename(os.path.abspath(args.root))
     machine = os.path.join(args.root, "Claude/Map/machine")
     views = os.path.join(args.root, "Claude/Map/views")
     os.makedirs(views, exist_ok=True)
@@ -46,7 +47,7 @@ def main():
     for r in raw:
         by_top.setdefault(r["path"].split("/")[0], []).append(r)
     lines = [
-        "# FILE_MAP — Project 824 full catalog",
+        f"# FILE_MAP — {job} full catalog",
         f"\n**Regenerated:** {today} · **Last full scan:** {state.get('last_full_scan','?')} · **Records:** {len(recs)}",
         "\n**Wiki:** [[file-map]] · Queue: [UNPROCESSED](UNPROCESSED.md) · Supersessions: [SUPERSEDED](SUPERSEDED.md)",
         "\n> Generated from `machine/manifest.json` — do not hand-edit. Raw files never move; this map records where things ARE.",

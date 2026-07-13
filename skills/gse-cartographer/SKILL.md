@@ -1,7 +1,7 @@
 ---
 name: gse-cartographer
 description: >
-  Maintain the Project File Map (Claude/Map/) — the discovery backbone of the Project824 OS.
+  Maintain the Project File Map (Claude/Map/) — the discovery backbone of the project's Claude OS.
   Use for: boot diff-scans ("what's new in the project folder?"), classifying newly found files,
   full remaps, regenerating map views, and answering "what exists that we haven't processed?".
   Built per the 2026-07-10 OS improvement ultraplan, Phase 2 (decisions D4, D5, D7, D8, D11).

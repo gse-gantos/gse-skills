@@ -1,6 +1,6 @@
-# 824 orientation (replaces upstream memory workflow)
+# Project OS orientation (replaces upstream memory workflow)
 
-> **Upstream superseded (2026-07-10, ultraplan 4.1/D2):** the ClaudeOS MEMORY.md hierarchy this file used to describe is retired. `Claude/_Memory/` is the single memory system on Job 824.
+> **Upstream superseded (2026-07-10, ultraplan 4.1/D2):** the ClaudeOS MEMORY.md hierarchy this file used to describe is retired. `Claude/_Memory/` is the single memory system on this job.
 
 ## Where knowledge lives
 

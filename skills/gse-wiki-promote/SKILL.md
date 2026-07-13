@@ -2,11 +2,11 @@
 name: gse-wiki-promote
 description: >
   Promote an explicitly approved artifact from Claude/_Memory/outputs/ into durable wiki knowledge.
-  Fork of gsewiki:promote for Job 824 (real staging home is _Memory/outputs/, created 2026-07-10).
+  Fork of gsewiki:promote (staging home is _Memory/outputs/).
   Only on explicit approval — never inferred.
 ---
 
-# gse-wiki promote (824 fork)
+# gse-wiki promote (GSE fork)
 
 Read `references/house-rules.md` first. Respect `_Memory/AGENTS.md`.
 

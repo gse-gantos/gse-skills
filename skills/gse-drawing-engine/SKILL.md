@@ -1,12 +1,12 @@
 ---
 name: gse-drawing-engine
-description: "Job-824 fork of drawing-engine (ultraplan 4.2) — map-driven input, D1 output placement, _Memory orientation, supersessions registered in the Project File Map. Unified construction-drawing skill for GSE. Processes a drawing set ONCE into a provenance-tracked, coverage-honest file database (drawing-db/), then answers RFIs, queries, and takeoffs by reading that database — never re-reading the raw PDF. Merges the write rigor of drawing-library with the query interface of read-drawing-beta over one canonical schema. Use whenever the user points at drawing PDFs to process/index/analyze a set, asks 'what sheet shows…' / 'which drawing covers…', wants a drawing library or RFI candidates from drawings, updates a revised/addendum set, or references drawings.md / sheet_index / drawing-db. Supersedes (and replaces) read-drawing-beta and drawing-library."
+description: "GSE fork of drawing-engine (ultraplan 4.2) — map-driven input, D1 output placement, _Memory orientation, supersessions registered in the Project File Map. Unified construction-drawing skill for GSE. Processes a drawing set ONCE into a provenance-tracked, coverage-honest file database (drawing-db/), then answers RFIs, queries, and takeoffs by reading that database — never re-reading the raw PDF. Merges the write rigor of drawing-library with the query interface of read-drawing-beta over one canonical schema. Use whenever the user points at drawing PDFs to process/index/analyze a set, asks 'what sheet shows…' / 'which drawing covers…', wants a drawing library or RFI candidates from drawings, updates a revised/addendum set, or references drawings.md / sheet_index / drawing-db. Supersedes (and replaces) read-drawing-beta and drawing-library."
 ---
 
-# gse-drawing-engine (824 fork)
+# gse-drawing-engine (GSE fork)
 
 > **Fork provenance:** forked 2026-07-10 from installed `drawing-engine` per ultraplan 4.2.
-> Changes: 824 namespace (D1), map-driven input, `_Memory/` orientation replacing the retired
+> Changes: canonical namespace (D1), map-driven input, `_Memory/` orientation replacing the retired
 > MEMORY.md loader, supersession registration in `Claude/Map/`, backlink emission, map-update
 > contract, dead `00_Resources/` references dropped. Pipeline, router, scripts, and protocols
 > inherited unchanged.
@@ -65,7 +65,7 @@ the script exits non-zero if any write protocol leaks into a QUERY's list.
 
 ---
 
-## 1. Canonical namespace — 824 rules (write only here)
+## 1. Canonical namespace (write only here)
 
 **Input — wherever the map points (D5):** drawing PDFs may sit anywhere in the project
 folder (`Specs & Drawings/Drawings/`, a Change Events folder, a submittal package).
@@ -135,7 +135,7 @@ caveat or refusal, and every markdown view carries a coverage banner at top.
 
 ---
 
-## Orientation & scope (824)
+## Orientation & scope
 
 The ClaudeOS MEMORY.md hierarchy is RETIRED (AGENTS.md §9) — do not look for
 MEMORY.md files. Instead, before running:

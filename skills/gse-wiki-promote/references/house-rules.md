@@ -1,4 +1,4 @@
-# gse-wiki house rules — Job 824
+# gse-wiki house rules
 
 Shared by all four gse-wiki skills (ingest / promote / query / audit). These OVERRIDE the upstream gsewiki plugin's generic assumptions. Where this file and `_Memory/AGENTS.md` differ, AGENTS.md wins.
 
@@ -21,7 +21,7 @@ Hierarchy for reading: `index.md → wiki/ → meta/ → _raw/ → outputs/`. Th
 
 Ingest consumes from wherever **the map** points — not just `_raw/` and skill outputs. Sources: `Claude/Map/views/UNPROCESSED.md` queue items routed to ingest by the §4 schema; skill outputs (specs-md, drawing-db, extracted meetings); `_raw/`; any mapped document anywhere in the project folder. **Mixed packages split per D6:** each piece routes to its content-type home; ALL pieces cross-link to ONE package node (a wiki page preserving the original grouping, e.g. `ce-03-package.md`). Never move raw files; record provenance from the map record.
 
-**Do not bulk-process the queue unprompted** (Gavin, 2026-07-10): ingest runs when a human asks for a specific source or approves a proposed one.
+**Do not bulk-process the queue unprompted** (standing rule): ingest runs when a human asks for a specific source or approves a proposed one.
 
 ## Link mesh (D9 — three enforced layers)
 
@@ -36,7 +36,7 @@ Density target ~40%, but **dense AND relevant** — indiscriminate linking destr
 When an ingested project fact (locked decision, RFI resolution, binding clarification) also belongs on a **seed/topic page** (pipe-materials, valves, bolts-nuts-gaskets, waterstop, division-3-concrete, …), add it under an overlay heading on that page:
 
 ```markdown
-## 824 — project decisions
+## Project decisions
 - 1/8" EPDM flange gaskets project-wide (Opterra Clarifications 11/20/2025) — see [[hub-or-decision-page]]
 ```
 
@@ -58,4 +58,4 @@ After every ingest/promote that consumes a mapped source: mark the manifest reco
 - **PII discipline (D7):** synthesis from payroll/payment/timecard sources summarizes — individual wage/PII detail stays out of wiki prose.
 - **Three-firm rule:** any drawing-derived claim cites whose drawing (original EOR / PK / MKM / G3). PK=concrete/structural layout, MKM=equipment supports/handrails/screw conveyor slab; overlaps get flagged, not resolved.
 - **Binding clarifications:** the 11/20/2025 Opterra table in AGENTS.md §3 overrides spec text — don't re-flag those as discrepancies or contradictions.
-- **Never delete** — retire to `Claude/_archive/` (Gavin's standing rule).
+- **Never delete** — retire to `Claude/_archive/` (standing rule).
