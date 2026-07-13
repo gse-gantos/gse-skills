@@ -31,13 +31,13 @@ and a checklist block in `checklist_library.md §7.3`.
 5. **Name the plan.** Before Phase 1, write the plan as one bullet per piece:
    *piece → what to verify → source + location → known gaps.* The lenses execute this plan.
 
-## Worked example — rebar placing drawing (headworks-bypass #525)
+## Worked example — a rebar placing drawing
 
-> Piece: RW1–RW3 weir structure placing drawing.
-> - Bar size / grade / spacing / quantity → **contract structural drawings** for the weir
->   structure (query drawing-db `_sp02-headworks-bypass`), + spec 03 20 00 §2.01 for material.
+> Piece: a placing drawing for a cast-in-place concrete structure.
+> - Bar size / grade / spacing / quantity → **contract structural drawings** for that
+>   structure (query the subproject's drawing-db `_spNN-<name>`), + spec 03 20 00 §2.01 for material.
 > - Development / lap-splice lengths → structural **general notes** sheet (drawing-db) / ACI ref.
 > - Cover & bar-support locations → drawings + 03 20 00 §3.03 applicability rules.
 > - Mill certs present for all heats → 03 20 00 §1.03.B (required-docs lens).
-> - Known gap: if the weir-structure sheet is `pending` in coverage → those geometry checks are
+> - Known gap: if that structure's sheet is `pending` in coverage → those geometry checks are
 >   **unverifiable**; name the sheet and route to the EOR/RFI.

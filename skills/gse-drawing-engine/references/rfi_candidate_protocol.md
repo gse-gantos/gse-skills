@@ -27,7 +27,7 @@ contractual concerns briefly (`flag` field), don't elaborate.
       "sheets": ["C-101", "M-401"],
       "disciplines": ["Civil", "Process"],
       "issue": "C-101 shows 24\" influent INV 92.50; M-401 hydraulic profile shows 92.05 at the same point.",
-      "evidence": "C-101 callout 'INV 92.50 STA 12+50'; M-401 profile node at headworks inlet '92.05'.",
+      "evidence": "C-101 callout 'INV 92.50 STA 12+50'; M-401 profile node at the inlet structure '92.05'.",
       "suggested_action": "RFI to engineer to confirm controlling invert before pipe layout.",
       "confidence": "high",
       "flag": null,

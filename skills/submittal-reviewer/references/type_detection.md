@@ -27,7 +27,7 @@ embed/anchor-bolt layouts, "shop drawing" in the title.
 **Authority:** **contract drawings** for sizes / spacing / geometry / development / location
 (query the drawing-db); spec for material grade and standards (e.g. 03 20 00 for rebar material,
 05 12 00 for structural steel). *This is the family that cannot be closed on specs alone.*
-**Examples here:** Grit Chamber rebar, headworks-bypass rebar (#525), structural steel, embeds.
+**Examples here:** cast-in-place rebar / placing drawings, structural steel, embeds.
 
 ## Mix designs / test reports
 **What it is:** a designed mixture or a test/certification result submitted for acceptance.

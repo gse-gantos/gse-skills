@@ -1,6 +1,6 @@
 ---
 name: submittal-reviewer
-description: Review a construction submittal as the GC before forwarding it to the EOR. Use when the user points at a submittal package (product data, shop drawings, mix design, test reports, equipment/O&M) and wants it checked, reviewed, or vetted against the specs, contract drawings, wiki, and project memory. Classifies the submittal, routes each piece to the authoritative source, runs a check-lens verification swarm with an adversarial QC pass, and writes one markdown file of issues ranked by severity then confidence. Also trigger on "review submittal", "check this submittal", "vet this shop drawing", "is this submittal compliant", or a submittal number (e.g. "review 525"). Step 2 of the spec-library / submittal-review system — consumes the spec review-cards, drawing-db, and wiki that those skills produce.
+description: Review a construction submittal as the GC before forwarding it to the EOR. Use when the user points at a submittal package (product data, shop drawings, mix design, test reports, equipment/O&M) and wants it checked, reviewed, or vetted against the specs, contract drawings, wiki, and project memory. Classifies the submittal, routes each piece to the authoritative source, runs a check-lens verification swarm with an adversarial QC pass, and writes one markdown file of issues ranked by severity then confidence. Also trigger on "review submittal", "check this submittal", "vet this shop drawing", "is this submittal compliant", or a bare submittal number. Step 2 of the spec-library / submittal-review system — consumes the spec review-cards, drawing-db, and wiki that those skills produce.
 ---
 
 # Submittal Reviewer
@@ -63,7 +63,7 @@ degrade gracefully when a source is absent (say so in the output rather than gue
    - **Prior reviews / RFIs / COs** — `Claude/Submittals/<subproject>/reviews/`,
      `RFIs/`, `Change Orders/` — to avoid re-flagging resolved items and catch resubmittal deltas.
 3. **Report what you found** in one line before proceeding, e.g.:
-   > Reviewing Submittal 525 (headworks-bypass). Specs: SPEC_INDEX found (1 section). Drawings:
+   > Reviewing Submittal <num> (<subproject>). Specs: SPEC_INDEX found (N sections). Drawings:
    > drawing-db present. Wiki: not available. Memory: none in mount. Prior reviews: none.
 
 ---

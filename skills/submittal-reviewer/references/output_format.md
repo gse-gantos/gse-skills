@@ -4,7 +4,7 @@ Read at **Phase 3**. Produce **one** markdown file. Nothing else (no Bluebeam ma
 separate Procore/RFI files in v1 — a single ranked issues file is the deliverable).
 
 **Path:** `Claude/Submittals/<subproject>/reviews/<num>-<slug>-review.md`
-(e.g. `525-headworks-bypass-rebar-review.md`). Then append one line to the subproject's
+(e.g. `<num>-<subproject>-<scope>-review.md`). Then append one line to the subproject's
 `Claude/Submittals/<subproject>/reviews/REVIEW_LOG.md`.
 
 ---
