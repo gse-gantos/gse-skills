@@ -1,0 +1,15 @@
+{
+  "name": "gse-skills",
+  "owner": {
+    "name": "GSE Construction",
+    "email": "gantos@gseconstruction.com"
+  },
+  "plugins": [
+    {
+      "name": "gse-skills",
+      "source": "./",
+      "description": "GSE Construction internal Claude skills: drawing/spec/wiki processing, submittal review, and project file mapping.",
+      "version": "0.1.0"
+    }
+  ]
+}
