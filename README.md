@@ -34,13 +34,15 @@ Claude Code will pull the latest skills from this repo. To pick up future update
 | `gse-wiki-promote` | Promotes an explicitly-approved output into durable wiki knowledge. |
 | `gse-wiki-query` | Answers questions from a job wiki, map-aware (knows what exists but is unprocessed). |
 | `submittal-reviewer` | Classifies a submittal, routes it to specs/drawings/wiki, runs a check-lens review pass, and produces a ranked issues file. |
+| `grill-me` | Interviews you relentlessly about a plan or design, resolving each branch of the decision tree, until you reach shared understanding. |
 
 ## Status
 
-These skills were carried over from active development on Job 824 (Project824). Some still
-contain job-824-specific references (paths, rulings) that haven't been generalized for
-cross-job use yet — see each skill's `SKILL.md` for its current state. Treat this repo as the
-one source of truth going forward: don't hand-maintain a personal copy of any of these skills.
+These skills have been generalized for cross-job use — they contain no job-specific specs,
+documents, rulings, or identifiers. Each job supplies its own via its folder structure and
+`Claude/_Memory/AGENTS.md`; the skills only describe how to find and use them. Treat this repo
+as the one source of truth going forward: don't hand-maintain a personal copy of any of these
+skills.
 
 ## Repo layout
 
