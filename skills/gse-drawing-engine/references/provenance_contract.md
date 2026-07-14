@@ -10,6 +10,16 @@ record the write engine produces.
 1. **`source_type`** — how the claim was read. Closed set:
    `pdf_text` · `bluebeam_text` · `bluebeam_markup` · `image_visual` · `crop` ·
    `ocr` · `user_note` · `inference`.
+
+   **Field-validated caveat on `bluebeam_text` / `pdf_text` for vector CAD (L-001):**
+   on vector-CAD sheets, text extraction (Bluebeam `save_as_text` and often the
+   embedded PDF text layer) returns the **title block only** — sheet number,
+   title, date — with the schedules, key notes, tags, and dimensions absent.
+   Do not classify a vector-CAD sheet from `bluebeam_text` and rate it `high`;
+   the "text" you got is the title block, not the sheet. Read vector-CAD sheets
+   visually (`image_visual`) plus high-DPI crops, and note the reason. This does
+   not apply to scanned/raster sheets, where OCR can recover body content. See
+   `references/validated_constraints.md` (L-001) for the full finding.
 2. **`confidence`** — `high | medium | low`.
 3. **`evidence`** — enough to find it again: sheet number + page, and (where
    applicable) the callout/phrase quoted or the visual description.

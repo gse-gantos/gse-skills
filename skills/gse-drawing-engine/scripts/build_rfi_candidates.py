@@ -197,6 +197,10 @@ def main():
 def coverage_banner(coverage):
     if not coverage:
         return "> COVERAGE: unknown — coverage_status.json not yet written (Phase 3)."
+    if not coverage.get("total_sheets"):
+        return ("> COVERAGE: unknown — coverage_status.json is still the init stub (0 sheets). "
+                "Run scripts/build_coverage.py after the QC gate, then re-run this script so "
+                "the banner reflects the real ledger. Never publish a 0/0 banner.")
     if coverage.get("current"):
         return f"> COVERAGE: complete — {coverage.get('processed', 0)}/{coverage.get('total_sheets', 0)} sheets processed."
     total = coverage.get("total_sheets", 0)
@@ -212,7 +216,8 @@ def _fmt_list(xs):
 
 
 def render_rfi(views, name, date, candidates, banner):
-    L = [f"# RFI Candidates — {name}", "", banner, "",
+    L = [f"# RFI Candidates — {name}", "", banner,
+         "> AI-GENERATED DRAFT — PE review required. Verify every cited value against the source sheet before issuing.", "",
          f"_Generated {date or '(no date)'} · {len(candidates)} candidates_", "",
          "_Drawing-derived RFI candidates from the GC's perspective. Each cites "
          "evidence; confirm before issuing. Not a substitute for the Procore RFI log._", ""]
@@ -234,7 +239,8 @@ def render_rfi(views, name, date, candidates, banner):
 
 
 def render_coord(views, name, date, issues, banner):
-    L = [f"# Coordination Issues — {name}", "", banner, "",
+    L = [f"# Coordination Issues — {name}", "", banner,
+         "> AI-GENERATED DRAFT — PE review required.", "",
          f"_Generated {date or '(no date)'} · {len(issues)} issues_", ""]
     if not issues:
         L.append("_No coordination issues identified in this set._")
@@ -254,7 +260,8 @@ def render_coord(views, name, date, issues, banner):
 
 
 def render_oq(views, name, date, questions, banner):
-    L = [f"# Open Questions — {name}", "", banner, "",
+    L = [f"# Open Questions — {name}", "", banner,
+         "> AI-GENERATED DRAFT — PE review required.", "",
          f"_Generated {date or '(no date)'} · {len(questions)} questions_", ""]
     if not questions:
         L.append("_No open questions logged for this set._")

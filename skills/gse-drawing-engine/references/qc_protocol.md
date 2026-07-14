@@ -70,3 +70,89 @@ fix the classification and re-run QC before the set is trusted.
 
 When QC is GREEN/partial and verification clean, the set is queryable: the router
 will route questions to QUERY, and every view carries an honest coverage banner.
+
+---
+
+## Post-QC accuracy gates (added 2026-07-02 — from an independent QA audit)
+
+These four checks are MANDATORY before a set is declared query-ready. Each maps
+to a real defect found by an independent QA audit.
+
+### 1. Write-integrity scan
+```
+python scripts/integrity_check.py --set-dir "<set>"
+```
+Enforced by script (exit 2 blocks promotion); covers gate 2 as well. What it does: re-read every file the run wrote (`machine/*.json`, `views/*.md`). Every JSON
+must parse; every markdown must end with a complete sentence/table row, not
+mid-word. Scan JSON string values for truncation tells: values ending mid-word,
+with an unclosed parenthesis/quote, or in a dangling article ("the", "a").
+One audited set shipped `"...gallery basemen"` and `"...('FALL PROTECTION DETA"` inside
+rfi_candidates.json, plus five project files cut off mid-word. A truncated file
+is a RED condition: rewrite it before promoting the run.
+
+### 2. Banner-vs-machine consistency
+Enforced by `integrity_check.py` (gate 1's script). For every `views/*.md`, the coverage banner numbers must equal
+`machine/coverage_status.json` (`processed`/`total_sheets`/`current`). If any
+view disagrees, re-run `build_rfi_candidates.py` / `build_summary.py` /
+`build_coverage.py`. Views rendered before the QC gate are stale by
+construction (see processing_protocol step 5).
+
+### 3. Tag-family sweep
+```
+python scripts/tag_sweep.py --set-dir "<set>" [--extra-prefix W1 ...]
+```
+Enforced by script: sweeps every `sheets/page_NNNN/page_NNNN.txt` for tag-shaped
+strings (longest-match, overlap-deduped) and diffs against `tag_index.json`.
+Exit 2 lists the missing families — add the tags (re-classify those sheets) or
+log an open question for each. The sweep only sees text-layer sheets; raster
+sheets remain covered by the classification pass. On re-validation against an
+audited set the script found the known missed `W1-CLF-*` family AND five more
+unindexed `W1-*` families the manual audit had not enumerated. On that set
+the whole `W1-CLF-*` family on I-4 was missed, including two probable source
+typos (`W1-CLF-0307D`, `W1-CPL-0301B`) that should have been RFI candidates.
+
+### 4. Schedule/matrix blind second read
+Any schedule sheet whose cells will feed a takeoff, procurement quantity, or
+register (demolition/repair matrices, pump schedules, conduit schedules) must be
+extracted TWICE before its values are treated as `high` confidence:
+- First read: normal classification pass.
+- Second read: an independent pass (fresh subagent or fresh session) that does
+  NOT see the first read's output, using identical-x-range header/data cropping
+  (crop the rotated header band and the data band over the same left/right
+  fractions of page width so columns map 1:1; verify against detected gridlines).
+- Reconcile cell-by-cell. Any mismatch demotes that cell to
+  `UNCERTAIN — PE REVIEW REQUIRED`; it must not enter a takeoff as confirmed.
+On one audited set, a single-read pass missed one X-cell in a 34x16 matrix (fall protection,
+effluent channel row) and a non-blind self-audit re-confirmed the wrong value.
+The blind second read caught it. X-mark applicability cells count: an X missed
+or invented changes a procurement quantity exactly like a wrong number.
+
+### 5. Field-validated constraint check
+Before declaring the set query-ready, reconcile it against
+`references/validated_constraints.md` — these are behaviors confirmed on a full
+prior set and are the likeliest silent errors:
+- Any vector-CAD sheet classified `high` off `bluebeam_text`/`pdf_text` with only
+  a title block in its `.txt` is suspect — it was probably read from the title
+  block alone (L-001). Re-check it was read visually.
+- P&ID loop tags sourced only from a balloon read must be `low` and carry an open
+  question (L-002).
+- Where a schedule sheet and a plan view disagree, confirm the schedule value
+  won and the conflict is logged (L-003).
+- Any count off an "illustration only" / "by manufacturer" / "typical" sheet must
+  be flagged as an open question, not a confirmed quantity (L-004).
+- Instrumented set (PLC/VFD/actuated valve/SCADA) → confirm a
+  `control_system_relationships.md` view exists or a coverage gap is logged (L-005).
+- Cross-discipline alias pairs (VAL/EMV, PMP/MTR) are deduped for any count (L-008).
+
+### Token note for visual sweeps
+When a gate or verification step needs the SAME small region checked on many
+sheets (title blocks, stamps, north arrows), do not view full pages one by one.
+Use:
+```
+python scripts/contact_sheet.py --pdf "<set.pdf>" --out-dir "<tmp>" [--region x0,y0,x1,y1] [--pages 1-54]
+```
+It renders the region of every page into labeled grid images (default region =
+bottom-right title block; ~12 tiles per image). Accuracy-neutral — same pixels
+at equal or better zoom, every tile labeled with its page number. Validated on
+a 54-sheet set: all 54 title blocks legible across 5 images, immediately
+re-confirming two known title findings.

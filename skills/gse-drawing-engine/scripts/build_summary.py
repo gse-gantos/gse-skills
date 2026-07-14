@@ -36,6 +36,9 @@ def load(machine, name, default):
 def banner(cov):
     if not cov:
         return "> COVERAGE: unknown."
+    if not cov.get("total_sheets"):
+        return ("> COVERAGE: unknown — coverage_status.json is still the init stub (0 sheets). "
+                "Run scripts/build_coverage.py after QC, then re-render. Never publish a 0/0 banner.")
     if cov.get("current"):
         flagged = f" ({len(cov.get('needs_verification', []))} flagged)" if cov.get("needs_verification") else ""
         return f"> COVERAGE: complete — {cov.get('processed',0)}/{cov.get('total_sheets',0)} sheets processed{flagged}."

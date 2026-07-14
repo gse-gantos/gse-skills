@@ -55,6 +55,16 @@ tag's confidence ceiling (min across its sheets), cheap attributes, and evidence
 Re-run after `cross_references.json` exists (Phase 2) to also stamp
 `referenced_by`. Writes the `views/tag_index.md` projection.
 
+## 5. Re-render views after the QC gate (mandatory — added 2026-07-02)
+
+The Phase-2 view renders (`build_rfi_candidates.py`) run while
+`coverage_status.json` is still the init stub, so their banners can read
+"0/0 sheets". After `qc_pass.py` and `build_coverage.py` complete, **re-run
+`build_rfi_candidates.py` and `build_summary.py`** so every published view
+carries the real coverage numbers. A view whose banner disagrees with
+`machine/coverage_status.json` is a defect (a prior set shipped a "PARTIAL — 0/0"
+banner over a 54/54-complete set). The QC gate now checks this.
+
 ## What's next
 Cross-references, detail index, coordination issues, and the RFI-candidate
 contract are Phase 2. Coverage status, the QC gate, and promotion of

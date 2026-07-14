@@ -27,7 +27,7 @@ contractual concerns briefly (`flag` field), don't elaborate.
       "sheets": ["C-101", "M-401"],
       "disciplines": ["Civil", "Process"],
       "issue": "C-101 shows 24\" influent INV 92.50; M-401 hydraulic profile shows 92.05 at the same point.",
-      "evidence": "C-101 callout 'INV 92.50 STA 12+50'; M-401 profile node at the inlet structure '92.05'.",
+      "evidence": "C-101 callout 'INV 92.50 STA 12+50'; M-401 profile node at headworks inlet '92.05'.",
       "suggested_action": "RFI to engineer to confirm controlling invert before pipe layout.",
       "confidence": "high",
       "flag": null,
@@ -100,3 +100,30 @@ FS-4 coverage banner. The RFI record carries: `id`, `title`, `type`, `severity`,
 `sheets`, `disciplines`, `evidence`, `suggested_action`, `confidence`, `flag`,
 `source` (the originating CI/OQ id or `cross_reference`). This is the exact shape
 the downstream RFI generator consumes — don't parse raw sheets to build an RFI.
+
+---
+
+## Register handoff, string completeness, and provenance (added 2026-07-02)
+
+1. **Every drawing-derived RFI candidate must reach the project register.** The
+   drawing-db JSON is not a register. After the views render, append/merge the
+   candidates into the project's `Registers/rfi_candidates_register.md` (or the
+   project's equivalent) with a `Source` column (`drawing-db <set-name>` vs
+   `spec`). In one audit, six drawing candidates lived only in the JSON and were never
+   tracked. Use a distinct ID scheme `RFI-D01, RFI-D02, ...` so drawing
+   candidates can never collide with formal RFI numbers or spec-derived
+   candidate IDs (RFI-C##).
+2. **No truncated strings.** Write every `evidence`, `description`, and
+   `suggested_action` as complete sentences, then re-read the JSON after writing
+   and verify no value ends mid-word (see qc_protocol gate 1).
+3. **Conflicts quote both sides.** A candidate asserting a conflict must quote
+   BOTH conflicting values with their exact locations (sheet + callout, or spec
+   section + paragraph), so a reviewer can verify without re-deriving it.
+4. **Provenance fields.** Every candidate record carries
+   `"ai_draft": true` and `"review_status": "PE review required"`. Views print
+   the AI-GENERATED DRAFT banner line (render scripts now do this).
+5. **Quantity conflicts between spec-derived and drawing-derived values are
+   first-class RFI candidates.** If a schedule total disagrees with a
+   spec-derived register quantity (e.g. covers 10 per spec-derived registers vs
+   12 per Sheet D-1), that is not merely a data-sync chore — raise it as a
+   candidate immediately, then reconcile the registers.

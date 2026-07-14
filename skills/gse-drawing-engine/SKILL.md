@@ -5,11 +5,16 @@ description: "GSE fork of drawing-engine (ultraplan 4.2) — map-driven input, D
 
 # gse-drawing-engine (GSE fork)
 
-> **Fork provenance:** forked 2026-07-10 from installed `drawing-engine` per ultraplan 4.2.
-> Changes: canonical namespace (D1), map-driven input, `_Memory/` orientation replacing the retired
-> MEMORY.md loader, supersession registration in `Claude/Map/`, backlink emission, map-update
-> contract, dead `00_Resources/` references dropped. Pipeline, router, scripts, and protocols
-> inherited unchanged.
+> **Fork provenance:** forked 2026-07-10 from installed `drawing-engine` per ultraplan 4.2;
+> **rebased onto upstream `drawing-engine v2.0.0` on 2026-07-14.**
+> GSE-fork changes: canonical namespace (D1), map-driven input, `_Memory/` orientation replacing
+> the retired MEMORY.md loader, supersession registration in `Claude/Map/`, backlink emission,
+> map-update contract, dead `00_Resources/` references dropped.
+> Inherited from v2.0.0: the accuracy guardrails (`integrity_check.py`, `tag_sweep.py`,
+> `contact_sheet.py`, verbatim titles/tags + `index_title`, the four post-QC gates, RFI-D## merge)
+> and the field-validated extraction constraints (`validated_constraints.md`,
+> `control_system_relationships_protocol.md`). Pipeline, router, and remaining protocols inherited
+> unchanged.
 
 **Supersedes `read-drawing-beta` and `drawing-library`** — one skill, one database,
 one retrieval interface (canonical naming ruling: `_Memory/AGENTS.md` §9).
@@ -24,6 +29,35 @@ projection. Built and validated in phases (the source PRD is not present in this
 workspace — the v1-vs-v2 lessons live in
 `Claude/Platform/lessons_learned/drawing-skill-v1-vs-v2-comparison.md`); each
 phase ships with an acceptance test under `scripts/test_*.py`.
+
+## Accuracy guardrails (2026-07-02 — from an independent QA audit)
+
+Four mandatory post-QC gates now live at the end of `references/qc_protocol.md`.
+Gates 1-3 are ENFORCED BY SCRIPT (`scripts/integrity_check.py`,
+`scripts/tag_sweep.py` — exit 2 blocks promotion; both validated against the
+audited set, where they reproduce every known defect):
+write-integrity scan, banner-vs-machine consistency, tag-family sweep, and a
+**blind second read for any schedule/matrix that feeds takeoff or procurement
+quantities**. Titles and tags are captured **verbatim** (see
+`references/classification_protocol.md`, incl. the `index_title` field for
+cover-index vs title-block wording conflicts). Drawing-derived RFI candidates
+must be merged into the project register with `RFI-D##` IDs (see
+`references/rfi_candidate_protocol.md`). Views are re-rendered after the QC
+gate so no banner can contradict `coverage_status.json` (`processing_protocol.md` §5).
+
+## Field-validated constraints (via drawing-library Beta 1)
+
+`references/validated_constraints.md` records extraction behaviors confirmed by
+running a full drawing set to 100% coverage — treat them as defaults on a new
+set until source validation proves otherwise. The highest-impact ones:
+text extraction returns the **title block only** on vector CAD, so read those
+sheets visually (L-001); **never transcribe a schedule off the 2000px full-sheet
+PNG** — crop dense content with `crop_region.py --dpi 360` (L-007); a schedule
+sheet **governs over plan-view inference** (L-003); "illustration only" / "by
+manufacturer" notes **strip quantity authority**, so such counts are open
+questions, not takeoff line items (L-004); and instrumented sets get a
+`control_system_relationships.md` view (L-005). Load this reference during
+BUILD/UPDATE classification and QC.
 
 ## 0. Router — run this FIRST (PRD §4.1)
 
@@ -184,6 +218,8 @@ Before overwriting or renaming any existing file, show what changes and confirm
 - `references/qc_protocol.md` — the QC gate (green/yellow/red rules) + the verification step incl. the subagent. *(Phase 3)*
 - `references/query_protocol.md` — QUERY runbook: tag-index-first, the source-of-truth ladder, FS-1 coverage gap. *(Phase 4)*
 - `references/incremental_update_protocol.md` — UPDATE runbook: hash-diff, reprocess-only-changed, regenerate-all. *(Phase 5)*
+- `references/validated_constraints.md` — field-validated extraction constraints (L-001–L-015) from a full drawing set run to 100% coverage. Defaults on a new set until source validation proves otherwise. Load during BUILD/UPDATE classification and QC. *(from drawing-library Beta 1)*
+- `references/control_system_relationships_protocol.md` — how to build the `control_system_relationships.md` view for instrumented sets (PLCs, VFDs, actuated valves, SCADA). *(from drawing-library Beta 1)*
 
 ## Scripts
 
@@ -205,6 +241,9 @@ Before overwriting or renaming any existing file, show what changes and confirm
 - `scripts/query_drawing.py` — retrieval interface: tag-index lookup, NL scoring, FS-1 coverage-gap signal. *(Phase 4)*
 - `scripts/crop_region.py` — high-DPI crop of a sheet region (bottom of the source-of-truth ladder). *(Phase 4)*
 - `scripts/build_summary.py` — render the drawings.md query entry point. *(Phase 4)*
+- `scripts/integrity_check.py` — post-QC gates 1+2: JSON parse, truncation tells, md tails, banner-vs-coverage consistency. Exit 2 blocks promotion. *(2026-07-02)*
+- `scripts/tag_sweep.py` — post-QC gate 3: text-layer tag sweep vs tag_index.json; lists missing families. *(2026-07-02)*
+- `scripts/contact_sheet.py` — token saver: tiles the same region (default: title block) of many pages into labeled grid montages, so a 54-sheet sweep costs ~5 image reads instead of 54 at equal zoom. Use for title-block verification, revision-stamp sweeps, and any one-fact-per-sheet check. *(2026-07-02)*
 - `scripts/test_query.py` — Phase 4 acceptance test (tag-index lookup, coverage gap, no reprocess). *(Phase 4)*
 - `scripts/update_drawing.py` — incremental update: text-hash diff, reprocess-only-changed, changelog. *(Phase 5)*
 - `scripts/test_update.py` — Phase 5 acceptance test (only-changed-touched, indexes/banners refreshed). *(Phase 5)*

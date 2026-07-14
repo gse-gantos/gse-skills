@@ -14,7 +14,12 @@ validates and assembles them — it does not classify.
    `crop_region.py` (Phase 4 utility) rather than guessing.
 3. Apply `references/drawing_types.md` to set `discipline`, `document_type`,
    `view_type`, and `confidence`. Classify from **content**, never the filename
-   or a single keyword.
+   or a single keyword. Check `references/validated_constraints.md` for the
+   field-validated reads that catch common misclassifications — e.g. text
+   extraction returns the title block only on vector CAD (L-001), P&ID balloon
+   interiors don't render (L-002), a schedule sheet governs over plan-view
+   inference (L-003), and "illustration only"/"by manufacturer" notes strip
+   quantity authority (L-004).
 4. Set the provenance fields per `references/provenance_contract.md`:
    `source_type` and the sheet-level `extraction_confidence` (the confidence
    ceiling). Rate lower when in doubt.
@@ -26,6 +31,7 @@ validates and assembles them — it does not classify.
 {
   "sheet_number": "C-101",
   "title": "YARD PIPING PLAN",
+  "index_title": "",
   "discipline": "Civil",
   "document_type": "contract_drawing",
   "confidence": "high",
@@ -47,6 +53,24 @@ validates and assembles them — it does not classify.
   "notes": ""
 }
 ```
+
+### Title fidelity — VERBATIM rule (added 2026-07-02, from a QA audit)
+
+- `title` is the **title-block wording, copied verbatim** — never paraphrased,
+  never merged with other wording, never "improved." A QA audit found
+  invented words in titles ("DEMOLITION **OVERALL** PLAN", "SCUM WELL ELECTRICAL
+  **SITE** PLAN") that existed on neither the title block nor the cover-sheet
+  index. If you cannot read the title block, crop it at high zoom; if still
+  unreadable, set `confidence: "low"` and say so in `notes` — do not guess.
+- `index_title` — if the cover sheet's drawing index (G-1 or similar) uses
+  DIFFERENT wording for this sheet, record that wording verbatim here (else `""`).
+  When the two disagree (e.g. G-1 "SCUM SUMP PIT" vs title block "SCUM PUMP
+  PIT"), record BOTH and add an open question — a wording conflict in the source
+  set is a legitimate RFI candidate and affects keyword search. Never silently
+  pick one or blend them.
+- The same verbatim rule applies to `equipment_tags` and `key_callouts`: copy
+  exactly, including prefixes/suffixes (01-CLF-0301B is not CLF-301). Record
+  apparent source typos as-written plus a note; never normalize them away.
 
 Required: `sheet_number`, `title`, `discipline`, `document_type`, `confidence`,
 `extraction_confidence`, `source_type`, `summary`, `view_type`. Use the closed
@@ -77,3 +101,10 @@ sheet number is unreadable, use `"UNK-<page>"` and set `confidence: "low"`.
 - Then run `build_sheet_index.py` — it errors loudly on a bad enum, a missing
   required field, or an FS-3 ceiling violation, writing nothing until fixed.
 - Then run `build_tag_index.py` to build the inverted lookup.
+
+### Token note — title blocks in bulk
+Before classifying a large set, render title-block contact sheets once
+(`python scripts/contact_sheet.py --pdf <set.pdf> --out-dir <tmp>`) and read
+sheet numbers/titles for ALL pages from those few montage images; then classify
+content per sheet as usual. This fills `sheet_number`/`title`/`index_title`
+verbatim at a fraction of the image reads.
