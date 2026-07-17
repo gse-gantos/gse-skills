@@ -35,6 +35,7 @@ Claude Code will pull the latest skills from this repo. To pick up future update
 | `gse-wiki-query` | Answers questions from a job wiki, map-aware (knows what exists but is unprocessed). |
 | `submittal-reviewer` | Classifies a submittal, routes it to specs/drawings/wiki, runs a check-lens review pass, and produces a ranked issues file. |
 | `grill-me` | Interviews you relentlessly about a plan or design, resolving each branch of the decision tree, until you reach shared understanding. |
+| `gse-quote-comparison` | Compares/levels 2+ vendor material quotes into a formula-driven workbook (scope check, grouping analysis, negotiation hit-list, split-award) plus a summary that recommends an award only when the comparison is clean. |
 
 ## Status
 

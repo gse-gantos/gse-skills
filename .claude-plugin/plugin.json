@@ -1,7 +1,7 @@
 {
   "name": "gse-skills",
-  "version": "0.1.0",
-  "description": "GSE Construction internal Claude skills: drawing engine, spec library, project wiki (audit/ingest/promote/query), submittal reviewer, and project file cartographer.",
+  "version": "0.2.0",
+  "description": "GSE Construction internal Claude skills: drawing engine, spec library, project wiki (audit/ingest/promote/query), submittal reviewer, project file cartographer, quote comparison, and grill-me.",
   "author": {
     "name": "GSE Construction",
     "email": "gantos@gseconstruction.com"
